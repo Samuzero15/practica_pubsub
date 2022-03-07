@@ -1,0 +1,32 @@
+
+<%- include("header", {seccion: "Iniciar Sesion", opciones: null, user: null})%>
+
+<form action="/login" method="post" class="col col-md-3">
+    <input type="hidden" autocomplete="off">
+    <h1 class="text-center">Iniciar sesion</h1>
+    <div class="form-group">
+        <label for="email">Correo Electronico</label>
+        <input type="text" name="email" id="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="pass">Contraseña</label>
+        <input type="password" name="password" class="form-control" id="pass" form-control required>
+       
+    </div>
+
+    <% if(messages.error) { %>
+        <br>
+        <div>
+            <%console.log(messages.error)%>
+            <%= messages.error %>
+        </div>
+    <% }%>
+    <br>
+    <div class="form-group">
+        <input type="submit" value="Acceder" class="btn btn-primary"> 
+        <a href="/register" class="btn btn-success">Registrar</a>
+    </div>
+</form>
+
+
+<%- include("footer") %>

@@ -1,0 +1,35 @@
+
+<%- include("header", {seccion: "Detalles de " + pub.title, user: user, opciones: [
+{link: "/publicar", label: "Publicar una oferta de trabajo"},
+{link: "/mitablon", label: "Mi tablon de empleos"} ]}) %>
+
+<%if(pub == null){%>
+    <h1>Trabajo no encontrado.</h1>
+<%} else {%>
+<h1>Detalles del trabajo</h1>
+<div>
+    <h3><%= pub.title%></h3>
+</div>
+<div>
+    <p><%= pub.description %></p>  
+</div>
+<div>
+    <b>
+        <h4>Caracteristicas del trabajo.</h4>
+    <p>
+        Categoria del trabajo: <i><%= tags.categorias.find(c => c.id == pub.category).nombre %></i><br/>
+    
+        Años de experiencia requeridos: <i><%= tags.anos_exp.find(c => c.id == pub.exp_years).nombre %></i><br/>
+    
+        Tipo de Jornada: <i><%= tags.jornada.find(c => c.id == pub.duration).nombre %></i><br/>
+    
+        Tipo de Contrato: <i><%= tags.contrato.find(c => c.id == pub.contract).nombre %></i><br/>
+    </p><p>
+        Publicado por: <%= pub.author != -1 ? users.find(u => u.id == pub.author).name : "(Desconocido)" %>,
+         <i><%= pub.date %></i>
+    </p>
+    </b>
+</div>
+<%} %>
+<a href="/" class="btn btn-secondary">Regresar al tablon global.</a></li>
+<%- include("footer")%>

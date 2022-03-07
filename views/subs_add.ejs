@@ -1,0 +1,76 @@
+
+<%- include("header", {seccion: "Suscribirse a ofertas", user: user, opciones: [
+{link: "/publicar", label: "Publicar una oferta de trabajo"},
+{link: "/mitablon", label: "Mi tablon de empleos"} ]}) %>
+
+<h1>Suscribirse a nuevas ofertas de trabajo por caracteristicas.</h1> 
+
+
+<h3>Elija por lo menos 1 caracteristica que desee.</h3>
+<%if(messages.error){%>
+<h6><%= messages.error %></h6>
+<%}%>
+<form action="/sub/add" method="post">
+    <div class="row form-group">
+        <div class="col col-2">
+            <label for="catg" class="form-label"><b>Categoria de interés: </b></label>
+        </div>
+        <div class="col">
+            <select name="catg" id="catg" class="form-control">
+            <option value="-1"> (No Aplica) </option>
+            <%tags.categorias.forEach((c, i) => { %>
+                <option value="<%=c.id%>"><%=c.nombre%></option>
+            <%});%>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row form-group">
+        <div class="col col-2">
+            <label for="anos" class="form-label"><b>Años de experiencia deseados:</b></label>
+        </div>
+        <div class="col">
+            <select name="anos" id="anos" class="form-control">
+                <option value="-1"> (No Aplica) </option>
+                <%tags.anos_exp.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row form-group">
+        <div class="col col-2">
+            <label for="jorn" class="form-label"><b>Tipo de jornadas deseadas:</b></label>
+        </div>
+        <div class="col">
+            <select name="jorn" id="jorn" class="form-control">
+                <option value="-1"> (No Aplica) </option>
+                <%tags.jornada.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row form-group">
+        <div class="col col-2">
+            <label for="cont" class="form-label"><b>Tipo de contrato deseado: </b></label>
+        </div>
+        <div class="col">
+            <select name="cont" id="cont" class="form-control">
+                <option value="-1"> (No Aplica) </option>
+                <%tags.contrato.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary" value="Añadir subscripción">
+    <a href="/" class="btn btn-secondary">Regresar al tablon global</a>
+</form>
+
+
+
+<%- include("footer") %>

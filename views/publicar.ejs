@@ -1,0 +1,59 @@
+<%- include("header", {seccion: "Publicar una nueva oferta de trabajo.", user: user, opciones: [
+{link: "/publicar", label: "Publicar una oferta de trabajo"},
+{link: "/mitablon", label: "Mi tablon de empleos"} ]}) %>
+
+<form action="\publicar" method="post">
+    <input type="hidden" autocomplete="off">
+    <h1>Publicar oferta de trabajo</h1>
+    <div class="form-group">
+        <label for="title" class="form-label">Titulo.</label>
+        <input type="text" name="title" id="title" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="desc" class="form-label">Descripción.</label>
+        <textarea class="form-control" name="desc" id="desc" class="form-control" rows="5" 
+        required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="catg" class="form-label">Categorias</label>
+        <select name="catg" id="catg" class="form-control" required>
+            <option value=""> -- Elija una categoria -- </option>
+            <%tags.categorias.forEach((c, i) => { %>
+                <option value="<%=c.id%>"><%=c.nombre%></option>
+            <%});%>
+        </select>
+    </div>
+    <div class="row form-group">
+        <div class="form-group col">
+            <label for="anos" class="form-label">Años de experiencia:</label>
+            <select name="anos" id="anos" class="form-control" required>
+                <option value=""> -- Elija la duración -- </option>
+                <%tags.anos_exp.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label for="jorn" class="form-label">Jornada:</label>
+            <select name="jorn" id="jorn" class="form-control" required>
+                <option value=""> -- Elija la jornada -- </option>
+                <%tags.jornada.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label for="cont" class="form-label">Tipo de contrato:</label>
+            <select name="cont" id="cont" class="form-control" required>
+                <option value=""> -- Elija el tipo de contrato -- </option>
+                <%tags.contrato.forEach((c, i) => { %>
+                    <option value="<%=c.id%>"><%=c.nombre%></option>
+                <%});%>
+            </select>
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Publicar" class="btn btn-primary">
+</form>
+
+<%- include("footer") %>

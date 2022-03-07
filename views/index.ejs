@@ -1,0 +1,44 @@
+<%- include("header", {seccion: "Tablon de trabajos", user: user, opciones: [
+{link: "/publicar", label: "Publicar una oferta de trabajo"},
+{link: "/mitablon", label: "Mi tablon de empleos"} ]})%>
+<h1>Tablon de trabajo</h1>
+
+<%if(info != null || info.length != 0){%>
+<h3>Ordenar el tablon de trabajo por:</h3>
+<ul>
+    <li>
+        Categoria 
+        (<a href="/?por=catg&desc=0">Ascendente</a>  / <a href="/?por=catg&desc=1">Descendente</a>)
+    </li>
+    <li>
+        Años de experiencia 
+        (<a href="/?por=anos&desc=0">Ascendente</a>  / <a href="/?por=anos&desc=1">Descendente</a>)
+    </li>
+    <li>
+        Tipo de Jornada 
+        (<a href="/?por=jorn&desc=0">Ascendente</a>  / <a href="/?por=jorn&desc=1">Descendente</a>)
+    </li>
+    <li>
+        Tipo de Contrato 
+        (<a href="/?por=cont&desc=0">Ascendente</a>  / <a href="/?por=cont&desc=1">Descendente</a>)
+    </li>
+</ul>
+
+
+<%info.forEach((i) => { %>
+<div>
+    <h3 class="display-6"><a href="/show/<%= i.id %>"><%= i.title %></a></h3>
+    <p class="lead"><%=i.description.substring(0, 256) + "..."%></p>
+    <hr class="my-1">
+    <p><b><%= crit.catg.find(c => c.id == i.category).nombre %></b>, 
+    <b><%= crit.anos.find(c => c.id == i.exp_years).nombre %></b> de experiencia, 
+    <b><%= crit.jorn.find(c => c.id == i.duration).nombre %></b>, 
+    <b><%= crit.cont.find(c => c.id == i.contract).nombre %></b></p>
+    <hr>
+  </div>
+<%});%>
+<%} else { %>
+    <h3> No hay trabajos disponibles! </h3>
+<%}%>
+
+<%- include("footer")%>
